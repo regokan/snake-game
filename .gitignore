@@ -2,3 +2,6 @@
 
 # Build files
 build/
+
+# VScode Settings
+./.vscode/settings.json

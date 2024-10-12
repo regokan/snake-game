@@ -1,11 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <random>
-#include "SDL.h"
+#include <mutex>
+#include <vector>
 #include "controller.h"
+#include "foodmanager.h"
 #include "renderer.h"
-#include "snake.h"
 
 class Game {
  public:
@@ -17,17 +17,20 @@ class Game {
 
  private:
   Snake snake;
-  SDL_Point food;
+  FoodManager _food_manager;
+  std::vector<FoodItem> active_food;  // Store active food items
 
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
 
+  std::mutex food_mutex;
   int score{0};
 
   void PlaceFood();
   void Update();
+  void ManageFood();
 };
 
 #endif

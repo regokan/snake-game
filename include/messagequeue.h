@@ -1,3 +1,6 @@
+#ifndef MESSAGEQUEUE_H
+#define MESSAGEQUEUE_H
+
 #include <condition_variable>
 #include <deque>
 #include <mutex>
@@ -38,3 +41,5 @@ class MessageQueue {
   std::mutex _mutex;
   std::condition_variable _cond;
 };
+
+#endif  // MESSAGEQUEUE_H

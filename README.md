@@ -178,12 +178,12 @@ The project consists of the following core classes:
 ```cpp
 void FoodManager::CreateAndRemoveFood(int id) {
   while (true) {
-    std::this_thread::sleep_for(std::chrono::seconds(5 + rand() % 6));
-
     std::lock_guard<std::mutex> lock(food_mutex);
     FoodItem food{random_w(engine), random_h(engine), id};
     std::cout << "Creating food item " << id << " at (" << food.x << ", " << food.y << ")\n";
     food_queue.send(std::move(food));
+
+    std::this_thread::sleep_for(std::chrono::seconds(5 + rand() % 6));
   }
 }
 ```

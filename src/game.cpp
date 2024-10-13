@@ -110,6 +110,7 @@ void Game::Update() {
     std::cout << "Snake ate food! Score: " << ++score << "\n";
     snake.GrowBody();
     snake.speed += 0.02;
+    snake.initial_speed += 0.02;  // Ensure initial speed reflects the new base speed
     active_food.erase(it);  // Remove the eaten food
   }
 }

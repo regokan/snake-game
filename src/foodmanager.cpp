@@ -1,9 +1,9 @@
 #include "foodmanager.h"
 
 FoodManager::FoodManager(int grid_width, int grid_height)
-    : random_w(0, grid_width - 1),
+    : engine(dev()),
       random_h(0, grid_height - 1),
-      engine(dev()) {}
+      random_w(0, grid_width - 1) {}
 
 void FoodManager::Start(int food_count) {
   for (int i = 0; i < food_count; ++i) {

@@ -23,6 +23,6 @@ void FoodManager::CreateAndRemoveFood(int id) {
     active_food_count++;  // Increment active food count
 
     std::this_thread::sleep_for(
-        std::chrono::seconds(5 + rand() % 6));  // Wait 5-10 seconds
+        std::chrono::seconds(1 + rand() % 2));  // Wait 1-3 seconds
   }
 }

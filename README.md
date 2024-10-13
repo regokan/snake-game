@@ -183,7 +183,7 @@ void FoodManager::CreateAndRemoveFood(int id) {
     std::cout << "Creating food item " << id << " at (" << food.x << ", " << food.y << ")\n";
     food_queue.send(std::move(food));
 
-    std::this_thread::sleep_for(std::chrono::seconds(5 + rand() % 6));
+    std::this_thread::sleep_for(std::chrono::seconds(1 + rand() % 3));
   }
 }
 ```

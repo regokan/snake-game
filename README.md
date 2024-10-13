@@ -33,19 +33,24 @@ This **Snake Game** is a modern C++ implementation that expands on the tradition
 
    - In a traditional snake game, only one food item exists at a time. Here, **multiple food items appear and disappear periodically**.
    - **Food Expiration**: If a food item is not consumed within **10 seconds**, it disappears. This creates time-sensitive challenges for the player.
-   - **Thread-Safe Generation**: We use **multi-threading** to generate food items asynchronously, managed by `FoodManager`. The food generator uses **randomized intervals (5-10 seconds)** to introduce unpredictability.
+   - **Thread-Safe Generation**: We use **multi-threading** to generate food items asynchronously, managed by `FoodManager`. The food generator uses **randomized intervals (1-3 seconds)** to introduce unpredictability.
 
-2. **Efficient Synchronization with Mutex**:
+2. **Speed Adjustment with Direction Holding**:
+
+   - The snake's speed increases if the player holds down the **same direction key** (W, A, S, D, or arrow keys). This allows for **more precise control** and adds an extra layer of challenge to the gameplay.
+   - Releasing the key **resets the snake's speed** to its initial value, ensuring that the game remains fair and balanced.
+
+3. **Efficient Synchronization with Mutex**:
 
    - To prevent race conditions when accessing the shared food list, **mutex locks** ensure thread-safe updates between the `Game` and `Renderer` classes.
    - The `ManageFood()` function in the `Game` class **removes expired food items** safely, ensuring no invalid food is rendered.
 
-3. **Threading with Message Queues**:
+4. **Threading with Message Queues**:
 
    - Food items are sent from **food generator threads to the main game loop** using a **custom `MessageQueue`**.
    - The queue ensures smooth communication between threads without blocking the game loop.
 
-4. **Smooth Graphics and Input Handling with SDL2**:
+5. **Smooth Graphics and Input Handling with SDL2**:
    - The game is built with **SDL2** to handle window creation, rendering, and user input efficiently.
    - Supports **WASD** and **arrow keys** for movement, allowing flexible control.
 

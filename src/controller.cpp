@@ -11,36 +11,52 @@ void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
 
 void Controller::HandleInput(bool &running, Snake &snake) const {
   SDL_Event e;
+  const float speed_increment = 0.01f;
+  const float max_speed = 0.3f;
+
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
       running = false;
     } else if (e.type == SDL_KEYDOWN) {
       switch (e.key.keysym.sym) {
-        // Arrow keys
         case SDLK_UP:
         case SDLK_w:
-          ChangeDirection(snake, Snake::Direction::kUp,
-                          Snake::Direction::kDown);
+          if (snake.direction == Snake::Direction::kUp) {
+            snake.speed = std::min(snake.speed + speed_increment, max_speed);
+          } else {
+            ChangeDirection(snake, Snake::Direction::kUp, Snake::Direction::kDown);
+          }
           break;
 
         case SDLK_DOWN:
         case SDLK_s:
-          ChangeDirection(snake, Snake::Direction::kDown,
-                          Snake::Direction::kUp);
+          if (snake.direction == Snake::Direction::kDown) {
+            snake.speed = std::min(snake.speed + speed_increment, max_speed);
+          } else {
+            ChangeDirection(snake, Snake::Direction::kDown, Snake::Direction::kUp);
+          }
           break;
 
         case SDLK_LEFT:
         case SDLK_a:
-          ChangeDirection(snake, Snake::Direction::kLeft,
-                          Snake::Direction::kRight);
+          if (snake.direction == Snake::Direction::kLeft) {
+            snake.speed = std::min(snake.speed + speed_increment, max_speed);
+          } else {
+            ChangeDirection(snake, Snake::Direction::kLeft, Snake::Direction::kRight);
+          }
           break;
 
         case SDLK_RIGHT:
         case SDLK_d:
-          ChangeDirection(snake, Snake::Direction::kRight,
-                          Snake::Direction::kLeft);
+          if (snake.direction == Snake::Direction::kRight) {
+            snake.speed = std::min(snake.speed + speed_increment, max_speed);
+          } else {
+            ChangeDirection(snake, Snake::Direction::kRight, Snake::Direction::kLeft);
+          }
           break;
       }
+    } else if (e.type == SDL_KEYUP) {
+      snake.speed = snake.initial_speed;  // Reset speed to initial
     }
   }
 }

@@ -17,13 +17,13 @@ class Game {
 
  private:
   Snake snake;
-  FoodManager _food_manager;
   std::vector<FoodItem> active_food;  // Store active food items
 
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
+  FoodManager _food_manager;
 
   std::mutex food_mutex;
   int score{0};

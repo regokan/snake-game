@@ -1,4 +1,5 @@
 #include "game.h"
+#include <algorithm>
 #include <iostream>
 #include "SDL.h"
 

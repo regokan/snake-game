@@ -2,7 +2,8 @@
 OS := $(shell uname)
 
 .PHONY: all
-all: setup format build
+all: build
+# all: setup format build
 
 # Automatically select the correct setup target based on the OS
 .PHONY: setup
